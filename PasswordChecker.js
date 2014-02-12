@@ -35,12 +35,12 @@ var PasswordChekcer = (function () {
             return PasswordChekcer.ReturnValues.TooLittleVariety;
         }
 
-        for (i = 0; i < password.length; i++) {
+        for (i = 0; i < password.length - 1; i++) {
             if (Math.abs((password.charCodeAt(i + 1) - (password.charCodeAt(i)))) === 1) {
                 numberOfRepeats++;
             }
         }
-        maxrepeat = Math.round(3 + (0.09 * password.length));
+        maxrepeat = Math.floor(3 + (0.09 * password.length));
         if (numberOfRepeats > maxrepeat) {
             return PasswordChekcer.ReturnValues.TooSystematic;
         }

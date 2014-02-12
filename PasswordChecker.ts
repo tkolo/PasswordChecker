@@ -18,16 +18,16 @@ class PasswordChekcer {
     public static minlength: number = 6;
     public static mindiff: number = 5;
 
-    private static contains(arr:Array, value:any) {
+    private static contains(arr: Array, value: any) {
         return arr.indexOf(value) !== -1;
     }
 
-    public static CheckPassword(password:string, additionalValues:Array<string>, context:PasswordContext):number {
-        var junk:Array<string> = [],
-            i:number,
-            numberOfRepeats:number = 0,
-            maxrepeat:number,
-            additionalValue:string;
+    public static CheckPassword(password: string, additionalValues?: Array<string>, context?: PasswordContext): number {
+        var junk: Array<string> = [],
+            i: number,
+            numberOfRepeats: number = 0,
+            maxrepeat: number,
+            additionalValue: string;
 
         if (password.length < 4) {
             return PasswordChekcer.ReturnValues.WayTooShort;
@@ -50,12 +50,12 @@ class PasswordChekcer {
             return PasswordChekcer.ReturnValues.TooLittleVariety;
         }
 
-        for (i = 0; i < password.length; i++) {
+        for (i = 0; i < password.length - 1; i++) {
             if (Math.abs((password.charCodeAt(i + 1) - (password.charCodeAt(i)))) === 1) {
                 numberOfRepeats++;
             }
         }
-        maxrepeat = Math.round(3 + (0.09 * password.length));
+        maxrepeat = Math.floor(3 + (0.09 * password.length));
         if (numberOfRepeats > maxrepeat) {
             return PasswordChekcer.ReturnValues.TooSystematic;
         }
